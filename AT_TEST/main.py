@@ -12,6 +12,10 @@ def main():
     shell_invocation.shell_inv(name, host, ssh_client, commands)
     ssh_client.close()
     
+    
+    
+    
+    
 if __name__ == "__main__":
     main()
 
