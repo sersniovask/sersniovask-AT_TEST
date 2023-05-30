@@ -2,7 +2,6 @@ import csv
 from datetime import datetime
 
 
-
 def write_to_file(rows, hostname):
     fields = ["command", "result"]
     now = datetime.now()
