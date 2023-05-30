@@ -3,7 +3,7 @@ import paramiko
 
 def hostname_check(ssh_client):
     stdin, stdout, stderr = ssh_client.exec_command("cat /proc/sys/kernel/hostname")
-    hostname = stdout.read().decode()
+    hostname = stdout.read().decode().strip()
     if "RUTX" in hostname:
         print(f"Successfully connected to {hostname}")
         return "RUTX", hostname
