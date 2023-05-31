@@ -14,4 +14,4 @@ def hostname_check(ssh_client):
         print(f"Successfully connected to {hostname}")
     else:
         print("Not RUT or TRM2 device!")
-    #return hostname
+    return hostname

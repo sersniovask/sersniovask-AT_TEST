@@ -2,7 +2,7 @@ import os
 import json
 
 
-def get_commands():
+def get_from_file():
     try:
         current_directory = os.getcwd()
         relative_path = "AT_TEST/at_commands.json"
