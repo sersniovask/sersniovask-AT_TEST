@@ -28,7 +28,7 @@ def connect():
         ip = input("Enter the IP address: ")
         username = input("Enter the username: ")
         password = input("Enter the password: ")
-
+     
         try:
             ssh_client.connect(ip, username=username, password=password)
         except paramiko.AuthenticationException as auth_error:

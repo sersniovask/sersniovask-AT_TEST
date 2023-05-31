@@ -4,7 +4,6 @@ import src.checking_host as checking_host
 
 
 
-
 def main():
     ssh_client = shell.connect()
     commands = read_commands.get_commands() 
