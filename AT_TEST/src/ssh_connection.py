@@ -3,7 +3,7 @@ import paramiko
 import src.send_results_to_write as send_results_to_write
 import argparse
 
-# def connect():
+# def connect_ssh():
 #     ssh_client = paramiko.SSHClient()
 #     ssh_client.load_system_host_keys()
 #     ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -12,36 +12,34 @@ import argparse
 
 
 def connect_ssh():
-    default_ip = '192.168.1.1'
-    default_username = 'root'
-    default_password = 'admin01'
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-i', '--ip', default='192.168.1.1', help='Specify the IP address')
+    parser.add_argument('-u', '--username', default='root', help='Specify the username')
+    parser.add_argument('-p', '--password', default='Admin123', help='Specify the password')
+    args = parser.parse_args()
 
     ssh_client = paramiko.SSHClient()
     ssh_client.load_system_host_keys()
     ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
-    try:
-        ssh_client.connect(default_ip, username=default_username, password=default_password)
-    except paramiko.AuthenticationException:
-        print("Default authentication failed. Please provide the correct credentials.")
-
-        ip = input("Enter the IP address: ")
-        username = input("Enter the username: ")
-        password = input("Enter the password: ")
-     
+    while True:
         try:
-            ssh_client.connect(ip, username=username, password=password)
-        except paramiko.AuthenticationException as auth_error:
-            print(f"Authentication failed: {str(auth_error)}")
-        except paramiko.SSHException as ssh_error:
-            print(f"SSH connection failed: {str(ssh_error)}")
-        except Exception as err:
-            print(f"Error occurred: {str(err)}")
-    except Exception as err:
-        print(f"Error occurred: {str(err)}")
+            ssh_client.connect(args.ip, username=args.username, password=args.password)
+            print('Successfully connected to the router!')
+            break
+        except paramiko.AuthenticationException as e:
+            print('Authentication failed.')
+            if args.username != 'root':
+                args.username = input('Please enter a different username: ')
+            elif args.password != 'admin01':
+                args.password = input('Please enter a different password: ')
+            elif args.ip != '192.168.1.1':
+                args.ip = input('Please enter a different IP address: ')
+            else:
+                print('Incorrect username, password, and IP address provided.')
+                break
 
     return ssh_client
-
 
 def connect_shell(router_name, hostname, ssh_client, commands):
     channel = ssh_client.get_transport().open_session()
