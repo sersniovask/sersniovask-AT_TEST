@@ -22,7 +22,8 @@ def send_commands(channel, commands, hostname, rows):
                     time.sleep(0.1)
                     if not channel.recv_ready():
                         break
-        except:
+        except Exception as err:
+            print(f"Error occurred: {str(err)}")
             break
     write_commands.write_to_file(rows, hostname)
     print(f"\nTotal commands: {ok_count + error_count}\nTotal okays: {ok_count}\nTotal errors: {error_count}")

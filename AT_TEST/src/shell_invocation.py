@@ -31,10 +31,14 @@ def connect():
 
         try:
             ssh_client.connect(ip, username=username, password=password)
-        except Exception as e:
-            print(f"Error occurred: {str(e)}")
-    except Exception as e:
-        print(f"Error occurred: {str(e)}")
+        except paramiko.AuthenticationException as auth_error:
+            print(f"Authentication failed: {str(auth_error)}")
+        except paramiko.SSHException as ssh_error:
+            print(f"SSH connection failed: {str(ssh_error)}")
+        except Exception as err:
+            print(f"Error occurred: {str(err)}")
+    except Exception as err:
+        print(f"Error occurred: {str(err)}")
 
     return ssh_client
 
