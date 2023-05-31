@@ -1,7 +1,43 @@
-import getpass
+
 import paramiko
-import time
 import src.send_commands as send_commands
+import argparse
+
+# def connect():
+#     ssh_client = paramiko.SSHClient()
+#     ssh_client.load_system_host_keys()
+#     ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+#     ssh_client.connect('192.168.1.1', username= 'root', password='Admin123')
+#     return ssh_client
+
+
+def connect():
+    default_ip = '192.168.1.1'
+    default_username = 'root'
+    default_password = 'admin01'
+
+    ssh_client = paramiko.SSHClient()
+    ssh_client.load_system_host_keys()
+    ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+    try:
+        ssh_client.connect(default_ip, username=default_username, password=default_password)
+    except paramiko.AuthenticationException:
+        print("Default authentication failed. Please provide the correct credentials.")
+
+        ip = input("Enter the IP address: ")
+        username = input("Enter the username: ")
+        password = input("Enter the password: ")
+
+        try:
+            ssh_client.connect(ip, username=username, password=password)
+        except Exception as e:
+            print(f"Error occurred: {str(e)}")
+    except Exception as e:
+        print(f"Error occurred: {str(e)}")
+
+    return ssh_client
+
 
 def shell_inv(router_name, hostname, ssh_client, commands):
     channel = ssh_client.get_transport().open_session()
