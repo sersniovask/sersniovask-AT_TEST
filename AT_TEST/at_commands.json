@@ -1,5 +1,5 @@
 {
-    "RUT9":[
+    "RUT955":[
         "ATI",
         "AT+GMI",
         "AT+GMM",
@@ -68,7 +68,6 @@
         "AT+CNUM=?",
         "AT+CPBF=?",
         "AT+CPBR=?",
-        "AT+CPBS=?",
         "AT+CPBW=?",
         "AT+CSMS=?",
         "AT+CMGF=?",
@@ -127,7 +126,7 @@
         "AT+CBC=?",
         "AT+QSCLK=?"
     ],
-"RUTX":
+"RUTX11":
     [
         "ATI",
         "AT+GMI=?",

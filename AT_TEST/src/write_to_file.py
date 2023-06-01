@@ -7,7 +7,7 @@ def write_to_file(rows, hostname):
     now = datetime.now()
     date = now.strftime("%d of %b %Y-%X")
     try:
-        with open(f"sersniovask-AT_TEST/AT_TEST/results/test_results_{hostname}_{date}.csv", "w", newline='') as file:
+        with open(f"/home/studentas/Desktop/Python/sersniovask-AT_TEST/AT_TEST/results/test_results_{hostname}_{date}.csv", "w", newline='') as file:
             writer = csv.DictWriter(file, fieldnames=fields)
             writer.writeheader()
             writer.writerows(rows)

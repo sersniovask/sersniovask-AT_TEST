@@ -5,7 +5,7 @@ import json
 def get_from_file():
     try:
         current_directory = os.getcwd()
-        relative_path = "AT_TEST/at_commands.json"
+        relative_path = "at_commands.json"
         cmd_path = os.path.join(current_directory, relative_path)
         with open(cmd_path, "r") as command_file:
             commands = json.load(command_file)
